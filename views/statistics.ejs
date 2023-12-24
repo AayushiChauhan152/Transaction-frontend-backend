@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Statistics</title>
+    <%- include("header.ejs")%>
+
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .card {
+        width: 200px;
+        margin-left: 40%;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+      }
+      .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .search input,
+      label {
+        width: 150px;
+        margin-left: 10px;
+        margin-top: 50px;
+      }
+      .container button {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("nav.ejs")%>
+
+    <h1>Statistics</h1>
+    <div class="conatiner">
+      <div class="container mt-4">
+        <form action="/statistics" method="get" class="my-4 form-inline">
+          <div class="mb-3 search">
+            <label for="url">Enter Month</label>
+            <input type="text" name="month" class="form-control" required />
+          </div>
+          <button type="submit" class="btn btn-success">Get Statistics</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div>
+          <h4>Selected Month:</h4>
+          <%=selectedMonth%>
+        </div>
+        <div class="card-body">
+          <span
+            >Total Sale
+            <h4 class="card-text"><%=totalSaleAmount%></h4></span
+          >
+          <span
+            >Total sold items
+            <h4 class="card-text"><%= totalSoldItems%></h4></span
+          >
+          <span
+            >Total not sold items
+            <h4 class="card-text"><%= totalNotSoldItems%></h4></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <%- include("footer.ejs")%>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Statistics</title>
+    <%- include("header.ejs")%>
+
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .card {
+        width: 200px;
+        margin-left: 40%;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+      }
+      .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .search input,
+      label {
+        width: 150px;
+        margin-left: 10px;
+        margin-top: 50px;
+      }
+      form button {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("nav.ejs")%>
+
+    <h1>Bar-Chart</h1>
+    <div class="conatiner">
+      <div class="container mt-4">
+        <form action="/bar-chart" method="get" class="my-4 form-inline">
+          <div class="mb-3 search">
+            <label for="url">Enter Month</label>
+            <input type="text" name="month" class="form-control" required />
+          </div>
+          <button type="submit" class="btn btn-success">Get Statistics</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div>
+        <h4>Selected Month:</h4>
+        <%=selectedMonth%>
+      </div>
+      <canvas id="bar-chart" width="500" height="350"> </canvas>
+    </div>
+
+    <%- include("footer.ejs")%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      getData();
+
+      async function getData() {
+        labels = [
+          "0 - 100",
+          "101 - 200",
+          "201 - 300",
+          "301 - 400",
+          "401 - 500",
+          "501 - 600",
+          "601 - 700",
+          "701 - 800",
+          "801 - 900",
+          "901 - Infinity",
+        ];
+        values = "<%-data%>";
+
+        console.log(typeof labels[0]);
+        console.log(labels);
+
+        new Chart(document.getElementById("bar-chart"), {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "transaction",
+                backgroundColor: [
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                  "#3e95cd",
+                ],
+                data: values,
+              },
+            ],
+          },
+          options: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Bar chart",
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
